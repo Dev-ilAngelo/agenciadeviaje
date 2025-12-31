@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Magical Travel | Elite Management System</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header>
+            <div class="logo-container">
+                <div class="logo-icon">
+                    <i data-lucide="plane" style="color: white; width: 20px;"></i>
+                </div>
+                <h1 class="title-glow">Admin/MagicalTravel</h1>
+            </div>
+            <div style="font-size: 0.8rem; opacity: 0.5;">v2.0 Static Elite</div>
+        </header>
+
+        <!-- Navigation -->
+        <nav class="nav-tabs">
+            <button class="nav-tab active" onclick="showSection('section-dashboard')">Resumen</button>
+            <button class="nav-tab" onclick="showSection('section-form')">Alta Pasajero</button>
+            <button class="nav-tab" onclick="showSection('section-list')">Listados</button>
+            <button class="nav-tab" onclick="showSection('section-search')">Búsqueda DNI</button>
+        </nav>
+
+        <!-- Sections -->
+        
+        <!-- DASHBOARD SECTION -->
+        <section id="section-dashboard" class="section">
+            <div id="stats-summary" class="stats-grid">
+                <!-- Data injected by app.js -->
+            </div>
+            
+            <h2 style="margin: 2rem 0 1rem; font-size: 1.2rem; opacity: 0.8;">Ocupación por Destino</h2>
+            <div id="stats-details" class="stats-grid">
+                <!-- Detailed stats injected by app.js -->
+            </div>
+        </section>
+
+        <!-- FORM SECTION -->
+        <section id="section-form" class="section hidden">
+            <div class="glass-card" style="max-width: 600px; margin: 0 auto;">
+                <h2 style="margin-bottom: 1.5rem;">Cargar Nuevo Pasajero</h2>
+                <form id="passenger-form">
+                    <div class="form-group">
+                        <label>DNI (7-8 dígitos)</label>
+                        <input type="text" name="dni" placeholder="Ej: 35123456" required>
+                    </div>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                        <div class="form-group">
+                            <label>Apellido/s</label>
+                            <input type="text" name="apellido" placeholder="Ej: Perez" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Nombre/s</label>
+                            <input type="text" name="nombre" placeholder="Ej: Juan" required>
+                        </div>
+                    </div>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                        <div class="form-group">
+                            <label>Edad</label>
+                            <input type="number" name="age" min="1" max="120" placeholder="Ej: 25" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Destino</label>
+                            <select name="destination" required>
+                                <option value="BRA">Brasil ($25.000)</option>
+                                <option value="MDQ">Mar del Plata ($14.000)</option>
+                                <option value="MZA">Mendoza ($19.000)</option>
+                                <option value="BRC">Bariloche ($23.000)</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Método de Pago</label>
+                        <select name="payment" required>
+                            <option value="CASH">Efectivo (Precio Base)</option>
+                            <option value="CARD">Tarjeta (+5% Recargo)</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn-primary">Registrar Pasajero</button>
+                </form>
+            </div>
+        </section>
+
+        <!-- LIST SECTION -->
+        <section id="section-list" class="section hidden">
+            <div class="glass-card">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
+                    <h2>Pasajeros Ordenados</h2>
+                    <span style="font-size: 0.8rem; opacity: 0.5;">Mapeado de funciones ordenarPasajeros()</span>
+                </div>
+                <div style="overflow-x: auto;">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Pasajero</th>
+                                <th>DNI</th>
+                                <th>Edad</th>
+                                <th>Destino</th>
+                                <th>Importe</th>
+                            </tr>
+                        </thead>
+                        <tbody id="passenger-tbody">
+                            <!-- Rows injected by app.js -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEARCH SECTION -->
+        <section id="section-search" class="section hidden">
+            <div class="glass-card" style="max-width: 800px; margin: 0 auto;">
+                <h2 style="margin-bottom: 1.5rem;">Buscar Pasajero por DNI</h2>
+                <div class="form-group" style="position: relative;">
+                    <i data-lucide="search" style="position: absolute; left: 1rem; top: 1rem; width: 18px; opacity: 0.3;"></i>
+                    <input type="text" id="search-input" oninput="handleSearch(this.value)" placeholder="Ingrese DNI para filtrar..." style="padding-left: 3rem;">
+                </div>
+                <div style="overflow-x: auto; margin-top: 1rem;">
+                    <table>
+                        <tbody id="search-results">
+                            <!-- Filtered results show here via same logic as list -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <footer>
+        <div style="text-align: center; padding: 2rem; opacity: 0.3; font-size: 0.7rem;">
+            Magical Travel Premium | Portfolio UTN Static Migration | No Backend Required
+        </div>
+    </footer>
+
+    <script src="app.js"></script>
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+</html>
